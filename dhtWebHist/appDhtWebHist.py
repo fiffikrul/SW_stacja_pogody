@@ -122,11 +122,14 @@ def my_form_post():
         numSamples = (numMaxSamples-1)
     
     time, temp, hum = getLastData()
+    tempOut, humOut = getInternetData()
     
     templateData = {
 	'time'		: time,
 	'temp'		: temp,
 	'hum'		: hum,
+	'tempOut'	: tempOut,
+	'humOut'	: humOut,
 	'freq'		: freqSamples,
 	'rangeTime'	: rangeTime
 	}
