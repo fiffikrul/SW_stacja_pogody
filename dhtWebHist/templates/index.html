@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>DHT Data Sensor</title>
+    <link rel="stylesheet" href='../static/style.css'/>
+    <meta http-equiv="refresh" content="30" />
+    <style>
+		body {
+			text-align: center;
+		}
+
+		#g1,
+		#g2 {
+			width: 200px;
+			height: 160px;
+			display: inline-block;
+			margin: 1em;
+		}
+		
+		#g3,
+		#g4 {
+			width: 200px;
+			height: 160px;
+			display: inline-block;
+			margin: 1em;
+		}
+
+    </style>
+</head>
+
+<body>
+	<h1>SW Weather station</h1>
+    <div id="g1"></div>
+    <div id="g2"></div>
+    <hr>
+	<h1>Outside Weather</h1>
+    <div id="g3"></div>
+    <div id="g4"></div>
+	<hr>
+	<h3> HISTORICAL DATA </h3>
+		<p> Enter range of time to be retrieved in minutes (Sample Frequency: {{ freq }} minutes)
+		<form method="POST">
+			<input name="rangeTime" value= {{rangeTime}}>
+			<input type="submit">
+		</form></p>
+		<hr>
+		<img src="/plot/temp" alt="Image Placeholder" width="49%">
+		<img src="/plot/hum" alt="Image Placeholder" width="49%">
+	
+	<p> Filip Neunert & Szymon Kukla</p>
+    
+    <script src="../static/raphael-2.1.4.min.js"></script>
+    <script src="../static/justgage.js"></script>
+    <script>
+		var g1, g2, g3, g4;
+		document.addEventListener("DOMContentLoaded", function(event) {
+			g1 = new JustGage({
+				id: "g1",
+				value: {{temp}},
+				valueFontColor: "#FE65B7",
+				titleFontColor: "#FE65B7",
+				customSectors : [{"lo":-10,"hi":0,"color":"#9CEAF9"},
+						{"lo":1,"hi":7,"color":"#7FCBF3"},
+						{"lo":8,"hi":15,"color":"#71F4AE"},
+						{"lo":16,"hi":24,"color":"#6EEE76"},
+						{"lo":25,"hi":40,"color":"#ED803C"},],
+				min: -10,
+				max: 40,
+				title: "Temperature",
+				label: "Celcius"
+			});
+
+			g2 = new JustGage({
+				id: "g2",
+				value: {{hum}},
+				valueFontColor: "#FE65B7",
+				titleFontColor: "#FE65B7",
+				levelColors : ["#F0EC7E", "#98EE65", "#66DEF4"],
+				min: 0,
+				max: 100,
+				title: "Humidity",
+				label: "%"
+			});
+			g3 = new JustGage({
+				id: "g3",
+				value: {{tempOut}},
+				valueFontColor: "#FE65B7",
+				titleFontColor: "#FE65B7",
+				customSectors : [{"lo":-10,"hi":0,"color":"#9CEAF9"},
+						{"lo":1,"hi":10,"color":"#7FCBF3"},
+						{"lo":11,"hi":20,"color":"#71F4AE"},
+						{"lo":21,"hi":26,"color":"#6EEE76"},
+						{"lo":27,"hi":40,"color":"#ED803C"},],
+				min: -10,
+				max: 40,
+				title: "Temperature",
+				label: "Celcius"
+			});
+
+			g4 = new JustGage({
+				id: "g4",
+				value: {{humOut}},
+				valueFontColor: "#FE65B7",
+				titleFontColor: "#FE65B7",
+				levelColors : ["#F0EC7E", "#98EE65", "#66DEF4"],
+				min: 0,
+				max: 100,
+				title: "Humidity",
+				label: "%"
+			});
+
+		});
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
